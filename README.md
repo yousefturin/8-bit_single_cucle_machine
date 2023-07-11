@@ -46,14 +46,19 @@ The first 3 bits (001) can be used to identify the instruction as a PUSH instruc
 The first 3 bits (010) can be used to identify the instruction as a PULL instruction. The next 5 bits can be used to encode the memory address from which the value will be subtracted from the value in the GPR.
 
 5.	JUMP: The JUMP instruction has the following format: 
-7	6	5	4	3	2	1	0
-0	0	0	0	1	0	0	0
+
+| 7 |	6 |	5 |	4 |	3 |	2 |	1 |	0 |
+|---|---|---|---|---|---|---|---|
+| 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
+
 The first 3 bits (100) can be used to identify the instruction as a JUMP instruction. The next 5 bits can be used to encode the memory address to which the program counter will be set.
  
 6.	JUMPZ instruction has the following format: 
-| --- | --- |
+
 | 7 |	6 |	5 |	4 |	3 |	2 |	1 |	0 |
+|---|---|---|---|---|---|---|---|
 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 |
+
 
 The first 3 bits (101) can be used to identify the instruction as a JUMPZ instruction. The next 5 bits can be used to encode the memory address to which the program counter will be set if the value in the GPR is 0.
 
