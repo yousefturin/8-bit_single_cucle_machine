@@ -1,0 +1,41 @@
+.data
+           	Array:                . word 1,2,3,4,5
+ 
+ 
+ 
+.text                           	# The Text segment.
+ 
+Main:
+GET $GPR, 0			 # Load the first element of the array into the GPR.
+SET $GPR, 6			 # Store the value in the GPR into memory location 6.
+ # Increment the counter.
+bitload:
+
+PUSH $GPR, $GPR, 7		 # Add the value in memory location 7 to the GPR.
+SET $GPR, 7   			# store the value in the GPR back into memory location 7.
+ 
+ # Check if the counter is less than the length of the array.
+GET $GPR, 5   		# Load the value 5 (length of the array) into the GPR.
+PULL $GPR, $GPR, 7 	# Subtract the value in memory location 7 from the GPR.
+JUMPZ END 			# If the result is 0, jump to instruction 19 (END).
+ 
+        	# Load the next element of the array into the GPR.
+PUSH $GPR, $GPR, 8	 # Add the value 8 (size of each element in the array) to the GPR.
+GET $AR, $GPR      		# Load the value in the AR (memory address) into the GPR.
+PUSH $GPR, $GPR, $zero 	# Add the value in the GPR to the GPR.
+SET $AR, $GPR       		# Store the value in the GPR back into the AR.
+GET $AR, $GPR   	# Load the value at the memory location specified by the AR into the GPR.
+ 
+# Add the value in the GPR to the value in memory location 6.
+PUSH   $GPR, $GPR, 6       	 # Add the value in memory location 6 to the GPR.
+SET $GPR, 6   			# Store the value in the GPR back into memory location 6.
+ 
+# Increment the counter.
+PUSH $GPR, $GPR, 7 	# Add the value in memory location 7 to the GPR.
+SET $GPR, 7   			# Store the value in the GPR back into memory location 7.
+ 
+# Jump back to the beginning of the loop.
+JUMP Bitload    		# Jump to instruction 4.
+END:
+GET $GPR, 01000100 	# This value is representing the $v0, 10 in MIPS.
+SYSCALL
